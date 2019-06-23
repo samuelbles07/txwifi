@@ -218,6 +218,18 @@ func (wpa *WpaCfg) ConnectNetwork(creds WpaCredentials) (WpaConnection, error) {
 	return connection, nil
 }
 
+// Bridge command API
+func (wpa *WpaCfg) DisableAP() {
+	wpa.Log.Info("Disabling Access Point")
+
+	command := &Command{
+		Log:      wpa.Log,
+		SetupCfg: wpa.WpaCfg,
+	}
+
+	command.RemoveApInterface()
+}
+
 // Status returns the WPA wireless status.
 func (wpa *WpaCfg) Status() (map[string]string, error) {
 	cfgMap := make(map[string]string, 0)
